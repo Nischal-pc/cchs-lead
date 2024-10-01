@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -21,41 +21,36 @@ const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email format")
     .required("Email address is required"),
-  phoneNumber: Yup.string()
+  mobile: Yup.string()
     .matches(/^[0-9]*$/, "Mobile number must be only digits")
     .min(10, "Phone number must be exactly 10 digits")
     .max(10, "Phone number must be exactly 10 digits")
     .required("Mobile number is required"),
-  homeNumber: Yup.string()
+  home: Yup.string()
     .matches(/^[0-9]*$/, "Home number must be only digits")
     .notRequired(),
 });
 
 function NameInput() {
-  const { page, setPage, data, setData } = useContext(PageContext);
+  const { setPage, data, setData } = useContext(PageContext);
   const {
     control,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
+  } = useForm({resolver: yupResolver(validationSchema)});
 
-  // Populate the form with customer data when the component mounts
   useEffect(() => {
     if (data.customer) {
       setValue("firstName", data.customer.firstName || "");
       setValue("lastName", data.customer.lastName || "");
       setValue("email", data.customer.email || "");
-      setValue("phoneNumber", data.customer.phoneNumber || "");
-      setValue("homeNumber", data.customer.homeNumber || "");
+      setValue("mobile", data.customer.mobile || "");
+      setValue("home", data.customer.home || "");
     }
   }, [data.customer, setValue]);
 
-  // Handle the "Next" button click
   const onSubmit = (formData) => {
-    // Save the customer data in the context
     setData((prevData) => ({
       ...prevData,
       customer: {
@@ -63,14 +58,14 @@ function NameInput() {
         ...formData,
       },
     }));
-    setPage(3); // Proceed to the next step
+    setPage(3);
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="first_lastname">
-          <HStack spacing={4} align="stretch">
+          <HStack spacing={4} align="stretch" py={2}>
             <FormControl isInvalid={!!errors.firstName}>
               <FormLabel htmlFor="firstName">First Name</FormLabel>
               <Controller
@@ -104,7 +99,7 @@ function NameInput() {
           </HStack>
         </div>
         <div className="email_wrapper">
-          <FormControl isInvalid={!!errors.email}>
+          <FormControl isInvalid={!!errors.email} py={2}>
             <FormLabel>Email Address</FormLabel>
             <Controller
               name="email"
@@ -115,42 +110,42 @@ function NameInput() {
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             {!errors.email && (
-              <FormHelperText>Your email won't be shared.</FormHelperText>
+              <FormHelperText textAlign={"left"}>Your email will not be shared.</FormHelperText>
             )}
           </FormControl>
         </div>
         <div className="phonenum_wrapper">
-          <HStack spacing={4} align="stretch">
-            <FormControl isInvalid={!!errors.phoneNumber}>
-              <FormLabel htmlFor="phoneNumber">Mobile</FormLabel>
+          <HStack spacing={4} align="stretch" py={2}>
+            <FormControl isInvalid={!!errors.mobile}>
+              <FormLabel htmlFor="mobile">Mobile</FormLabel>
               <InputGroup>
                 <Controller
-                  name="phoneNumber"
+                  name="mobile"
                   control={control}
                   render={({ field }) => (
                     <Input
-                      id="phoneNumber"
+                      id="mobile"
                       type="tel"
                       placeholder="Enter your mobile number"
                       {...field}
                     />
                   )}
                 />
-                <FormErrorMessage>
-                  {errors.phoneNumber?.message}
-                </FormErrorMessage>
               </InputGroup>
+              <FormErrorMessage>
+                  {errors.mobile?.message}
+              </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={!!errors.homeNumber}>
-              <FormLabel htmlFor="homeNumber">Home Phone</FormLabel>
+            <FormControl isInvalid={!!errors.home}>
+              <FormLabel htmlFor="home">Home Phone</FormLabel>
               <InputGroup>
                 <Controller
-                  name="homeNumber"
+                  name="home"
                   control={control}
                   render={({ field }) => (
                     <Input
-                      id="homeNumber"
+                      id="home"
                       type="tel"
                       placeholder="Enter your home phone"
                       {...field}
@@ -158,7 +153,7 @@ function NameInput() {
                   )}
                 />
                 <FormErrorMessage>
-                  {errors.homeNumber?.message}
+                  {errors.home?.message}
                 </FormErrorMessage>
               </InputGroup>
             </FormControl>
@@ -168,11 +163,10 @@ function NameInput() {
           <HStack spacing={5} align="stretch" w="100%">
             <Button
               w="100%"
-              h="32px"
               mt="20px"
               colorScheme="blue"
               onClick={() => {
-                setPage(1); // Go back to the previous page
+                setPage(1);
               }}
             >
               Previous
@@ -180,7 +174,6 @@ function NameInput() {
             <Button
               type="submit"
               w="100%"
-              h="32px"
               mt="20px"
               colorScheme="blue"
             >

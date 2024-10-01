@@ -1,25 +1,18 @@
-// import React from "react";
-import { Input, Box, Heading, Stack, Container } from "@chakra-ui/react";
-import ServiceInqiry from "./ServiceInqiry";
+import { Input, Box, FormLabel, Stack, Container } from "@chakra-ui/react";
+import { useContext } from "react";
+import { PageContext } from "../../context/context";
 
 const MeetingDetail = () => {
+  const {data, setData} = useContext(PageContext);
+  
   return (
-    <>
-      <Container maxW="100%" py={8} px={0}>
-        <Box
-          p={8}
-          boxShadow="md"
-          borderRadius="lg"
-          bg="white"
-          border="1px"
-          borderColor="gray.200"
-          w="100%" // Stretching to fill the container width
-        >
-          <Stack spacing={6} align="center">
-            <Heading as="h2" size="lg" color="teal.600">
-              Meeting Details
-            </Heading>
-
+    <div>
+      <Container maxW="100%" py={4} px={0}>
+        <Box>
+          <Stack spacing={2} align="left">
+          <FormLabel fontWeight="bold" fontSize="lg" py={2}>
+            Meeting Details
+          </FormLabel>
             <Input
               placeholder="Select Date and Time"
               size="md"
@@ -27,12 +20,13 @@ const MeetingDetail = () => {
               focusBorderColor="teal.400"
               borderRadius="md"
               w="100%"
+              value={data.meetingTime}
+              onChange={e => setData({...data, meetingTime: e.target.value})}
             />
           </Stack>
         </Box>
       </Container>
-      <ServiceInqiry />
-    </>
+    </div>
   );
 };
 

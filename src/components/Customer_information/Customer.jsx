@@ -1,10 +1,9 @@
-import Location from "../Location/Location";
 import NameInput from "./input";
 import { Box } from "@chakra-ui/react";
-function Customer(props) {
+function Customer() {
   return (
     <div>
-      <Box py={10}>
+      <Box py={10} minW={{base: 'md', md: 'xl', xl: "3xl"}} maxW={{base: 'md', md: 'xl', xl: "3xl"}}>
         <NameInput />
       </Box>
     </div>

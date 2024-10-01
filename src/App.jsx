@@ -1,11 +1,6 @@
 import "./App.css";
 import {
   ChakraProvider,
-  FormControl,
-  FormLabel,
-  Select,
-  Button,
-  ButtonGroup,
   Box,
   Heading,
 } from "@chakra-ui/react";
@@ -17,21 +12,17 @@ import { PageContext } from "./context/context";
 import { useContext } from "react";
 
 function App() {
-  const { page, setPage } = useContext(PageContext);
-  console.log(page);
-  console.log(setPage);
+  const { page } = useContext(PageContext);
+
   return (
     <>
       <ChakraProvider>
-        <Box py={4} px={4}>
+        <Box py={'2em'} px={4} minW={{base: 'md', md: 'xl', xl: "3xl"}} maxW={{base: 'md', md: 'xl', xl: "3xl"}}>
           <Heading color="teal.600" fontSize="48px">
             LEAD GENERATION FORM
           </Heading>
         </Box>
-
-        <Box py={20}></Box>
         <StepperComponent />
-
         {page == 1 && <Lead />}
         {page == 2 && <Customer />}
         {page == 3 && <Location />}
