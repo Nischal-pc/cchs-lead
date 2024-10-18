@@ -6,14 +6,20 @@ function Lead() {
   const { setPage, data, setData } = useContext(PageContext);
 
   return (
-    <Box minW={{base: 'md', md: 'xl', xl: "3xl"}} maxW={{base: 'md', md: 'xl', xl: "3xl"}}>
+    <Box
+      minW={{ base: "md", md: "xl", xl: "3xl" }}
+      maxW={{ base: "md", md: "xl", xl: "3xl" }}
+    >
       <FormControl py={4}>
         <FormLabel>Lead Sources</FormLabel>
-        <Select 
+        <Select
           value={data.lead?.source}
-          onChange={e => setData({...data, lead: {...data.lead, source: e.target.value}})}>
+          onChange={(e) =>
+            setData({ ...data, lead: { ...data.lead, source: e.target.value } })
+          }
+        >
           <option>Hot Lead</option>
-          <option>Zero Lead</option>
+          <option>Net Zero Lead</option>
           <option>Bought Lead</option>
         </Select>
         <Button
