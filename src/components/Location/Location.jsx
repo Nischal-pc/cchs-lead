@@ -331,35 +331,37 @@ function Location() {
             Service Inquiry
           </FormLabel>
 
-          <FormControl isInvalid={!!errors?.lead?.types}>
-            <CheckboxGroup colorScheme="green">
-              <Wrap spacing={4} justify="flex-start">
-                {leadTypes.map((lead, index) => (
-                  <Checkbox
-                    key={index}
-                    isChecked={data.lead.types.includes(lead)}
-                    onChange={(e) => {
-                      const { checked } = e.target;
-                      setData({
-                        ...data,
-                        lead: {
-                          ...data.lead,
-                          types: checked
-                            ? [...data.lead.types, lead]
-                            : data.lead.types.filter((type) => type !== lead),
-                        },
-                      });
-                    }}
-                  >
-                    {lead}
-                  </Checkbox>
-                ))}
-              </Wrap>
-            </CheckboxGroup>
-            {errors?.lead?.types && (
-              <FormErrorMessage>{errors.lead.types}</FormErrorMessage>
-            )}
-          </FormControl>
+          {/* <FormControl isInvalid={!!errors?.lead?.types}> */}
+          <CheckboxGroup colorScheme="green">
+            <Wrap spacing={4} justify="flex-start">
+              {leadTypes.map((lead, index) => (
+                <Checkbox
+                  key={index}
+                  isChecked={data.lead.types.includes(lead)}
+                  onChange={(e) => {
+                    const { checked } = e.target;
+                    setData({
+                      ...data,
+                      lead: {
+                        ...data.lead,
+                        types: checked
+                          ? [...data.lead.types, lead]
+                          : data.lead.types.filter((type) => type !== lead),
+                      },
+                    });
+                  }}
+                >
+                  {lead}
+                </Checkbox>
+              ))}
+            </Wrap>
+          </CheckboxGroup>
+          {errors?.lead?.types && (
+            <Text color={"red.400"} py={2}>
+              {errors.lead.types}
+            </Text>
+          )}
+          {/* </FormControl> */}
 
           <div>
             <FormLabel htmlFor="notes" fontWeight="bold" fontSize="lg" py={2}>
