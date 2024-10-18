@@ -1,5 +1,4 @@
-import { createContext } from "react";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
 export const PageContext = createContext();
 const PageContextProvider = ({ children }) => {
@@ -14,7 +13,7 @@ const PageContextProvider = ({ children }) => {
       lastName: "",
       email: "",
       mobile: "",
-      home: ""
+      home: "",
     },
     address: {
       fullAddress: "",

@@ -1,12 +1,12 @@
+import {
+  Checkbox,
+  CheckboxGroup,
+  FormLabel,
+  Textarea,
+  Wrap,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { PageContext } from "../../context/context";
-import {
-    Checkbox,
-    Wrap,
-    CheckboxGroup,
-    FormLabel,
-    Textarea,
-  } from "@chakra-ui/react";  
 
 const ServiceInquiry = () => {
   const { data, setData } = useContext(PageContext);
@@ -33,29 +33,29 @@ const ServiceInquiry = () => {
   return (
     <form>
       <div>
-
         <FormLabel fontWeight="bold" fontSize="lg" py={2}>
           Service Inquiry
         </FormLabel>
 
-        <CheckboxGroup colorScheme="green">
+        <CheckboxGroup colorScheme="green" value={data.lead.types}>
           <Wrap spacing={4} justify="flex-start">
             {leadTypes.map((lead, index) => (
-              <Checkbox 
-                key={index}
-                isChecked={data.lead.types.includes(lead)} 
-                onChange={e => {
+              <Checkbox
+                key={lead}
+                // isChecked={data.lead.types.includes(lead)}
+                onChange={(e) => {
                   const { checked } = e.target;
                   setData({
-                    ...data, 
+                    ...data,
                     lead: {
-                      ...data.lead, 
-                      types: checked 
-                        ? [...data.lead.types, lead] 
-                        : data.lead.types.filter(type => type !== lead)
-                    }
+                      ...data.lead,
+                      types: checked
+                        ? [...data.lead.types, lead]
+                        : data.lead.types.filter((type) => type !== lead),
+                    },
                   });
-                }}>
+                }}
+              >
                 {lead}
               </Checkbox>
             ))}
@@ -74,7 +74,7 @@ const ServiceInquiry = () => {
             _focus={{ borderColor: "green.500", boxShadow: "outline" }}
             _hover={{ borderColor: "gray.400" }}
             value={data.notes}
-            onChange={(e) => setData({...data, notes: e.target.value})}
+            onChange={(e) => setData({ ...data, notes: e.target.value })}
           />
         </div>
       </div>
