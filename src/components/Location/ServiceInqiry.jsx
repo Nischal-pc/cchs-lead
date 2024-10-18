@@ -1,10 +1,4 @@
-import {
-  Checkbox,
-  CheckboxGroup,
-  FormLabel,
-  Textarea,
-  Wrap,
-} from "@chakra-ui/react";
+import { FormLabel, Textarea } from "@chakra-ui/react";
 import { useContext } from "react";
 import { PageContext } from "../../context/context";
 
@@ -37,10 +31,10 @@ const ServiceInquiry = () => {
           Service Inquiry
         </FormLabel>
 
-        <CheckboxGroup colorScheme="green">
-          <Wrap spacing={4} justify="flex-start">
+        <div>
+          <div spacing={4}>
             {leadTypes.map((lead, index) => (
-              <Checkbox
+              <input
                 key={index}
                 value={data.lead.types.includes(lead)}
                 onChange={(e) => {
@@ -57,10 +51,10 @@ const ServiceInquiry = () => {
                 }}
               >
                 {lead}
-              </Checkbox>
+              </input>
             ))}
-          </Wrap>
-        </CheckboxGroup>
+          </div>
+        </div>
 
         <div>
           <FormLabel htmlFor="notes" fontWeight="bold" fontSize="lg" py={2}>
