@@ -37,12 +37,12 @@ const ServiceInquiry = () => {
           Service Inquiry
         </FormLabel>
 
-        <CheckboxGroup colorScheme="green" value={data.lead.types}>
+        <CheckboxGroup colorScheme="green">
           <Wrap spacing={4} justify="flex-start">
             {leadTypes.map((lead, index) => (
               <Checkbox
-                key={lead}
-                // isChecked={data.lead.types.includes(lead)}
+                key={index}
+                value={data.lead.types.includes(lead)}
                 onChange={(e) => {
                   const { checked } = e.target;
                   setData({
