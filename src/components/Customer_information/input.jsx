@@ -1,17 +1,17 @@
-import { useContext, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import {
-  Input,
+  Button,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
   HStack,
-  FormHelperText,
-  FormErrorMessage,
+  Input,
   InputGroup,
-  Button,
 } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as Yup from "yup";
 import { PageContext } from "../../context/context";
 
 // Validation Schema
@@ -19,8 +19,8 @@ const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email address is required"),
+    .email("Invalid email format") // Specify the error message for invalid format
+    .nullable(),
   mobile: Yup.string()
     .matches(/^[0-9]*$/, "Mobile number must be only digits")
     .min(10, "Phone number must be exactly 10 digits")
@@ -38,7 +38,7 @@ function NameInput() {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({resolver: yupResolver(validationSchema)});
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   useEffect(() => {
     if (data.customer) {
@@ -110,7 +110,9 @@ function NameInput() {
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             {!errors.email && (
-              <FormHelperText textAlign={"left"}>Your email will not be shared.</FormHelperText>
+              <FormHelperText textAlign={"left"}>
+                Your email will not be shared.
+              </FormHelperText>
             )}
           </FormControl>
         </div>
@@ -132,9 +134,7 @@ function NameInput() {
                   )}
                 />
               </InputGroup>
-              <FormErrorMessage>
-                  {errors.mobile?.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.mobile?.message}</FormErrorMessage>
             </FormControl>
 
             <FormControl isInvalid={!!errors.home}>
@@ -152,9 +152,7 @@ function NameInput() {
                     />
                   )}
                 />
-                <FormErrorMessage>
-                  {errors.home?.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.home?.message}</FormErrorMessage>
               </InputGroup>
             </FormControl>
           </HStack>
@@ -171,12 +169,7 @@ function NameInput() {
             >
               Previous
             </Button>
-            <Button
-              type="submit"
-              w="100%"
-              mt="20px"
-              colorScheme="blue"
-            >
+            <Button type="submit" w="100%" mt="20px" colorScheme="blue">
               Next
             </Button>
           </HStack>
