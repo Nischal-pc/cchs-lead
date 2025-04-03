@@ -1,6 +1,6 @@
-import { FormControl, FormLabel, Select, Button, Box } from "@chakra-ui/react";
-import { PageContext } from "../../context/context";
+import { Box, Button, FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { useContext } from "react";
+import { PageContext } from "../../context/context";
 
 function Lead() {
   const { setPage, data, setData } = useContext(PageContext);
@@ -21,6 +21,7 @@ function Lead() {
           <option>Hot Lead</option>
           <option>Net Zero Lead</option>
           <option>Bought Lead</option>
+          <option>Morocco</option>
         </Select>
         <Button
           my={4}
