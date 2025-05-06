@@ -21,7 +21,7 @@ function Lead() {
           <option>Hot Lead</option>
           <option>Net Zero Lead</option>
           <option>Bought Lead</option>
-          <option>ACTION LEAD</option>
+          <option>Action Lead</option>
           {/* <option disabled={true}>Morocco</option> */}
         </Select>
         <Button
